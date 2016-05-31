@@ -2,14 +2,11 @@
 
 include('character.php');
 
-if (isset($_POST['submit'])) {
-	
 
-$detective = new Character($_POST['name']);
+$person = new character("dedede", 2, 3, 4, "Male", '1991-03-25');
 
-echo $detective->getName();
+$person->display();
 
-}
 
 ?>
 
