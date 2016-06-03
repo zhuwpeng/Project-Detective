@@ -3,11 +3,12 @@
 class Detective extends Character {
 	public $clues;
 	
+	
 	public function __construct($name, $strength, $intelligence, $charisma, $gender, $birthdate){
 		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $birthdate);
 	}
 	
-	public function investigate() {
+	public function getClues() {
  		$intelligence = $this->intelligence;
  		$clues = $this->clues;
 		if (0 < $intelligence  && $intelligence < 10) {
@@ -21,7 +22,8 @@ class Detective extends Character {
 		print $clues;
 	}
 	
-	public function interview() {
-		
+	public function giveStatistics($clues) {
+		$suspectStats =
+		for($i = 0; )
 	}
 }
