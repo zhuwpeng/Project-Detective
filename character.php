@@ -21,7 +21,7 @@ class Character {
 	}
 	
 	//Display character stats
-	public function display(){
+	public function displayStats(){
 		$age = $this->calculateAge($this->birthdate);
 		print "Name: " . $this->name . "<br>";
 		print "Age: " . $age . "<br>";

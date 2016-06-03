@@ -1,16 +1,18 @@
 <?php
 
 include('character.php');
+include('detective.php');
 
 
-$person = new character("dedede", 2, 3, 4, "Male", '1991-03-25');
+$person = new Detective("dedede", 2, 3, 4, "Male", '1991-03-25');
 
-$person->display();
+$person->displayStats();
+$person->investigate();
 
 
 ?>
 
-<DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 </head>
