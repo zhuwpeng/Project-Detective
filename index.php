@@ -2,12 +2,14 @@
 
 include('character.php');
 include('detective.php');
+include('location.php');
 
 
 $person = new Detective("dedede", 2, 3, 4, "Male", '1991-03-25');
 
 $person->displayStats();
-$person->investigate();
+$location1 = new Location("Test");
+$obtainableClues = $location1->getFindableClues();
 
 
 ?>

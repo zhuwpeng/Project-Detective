@@ -22,8 +22,11 @@ class Detective extends Character {
 		print $clues;
 	}
 	
-	public function giveStatistics($clues) {
-		$suspectStats =
-		for($i = 0; )
+	public function Arrest($isCulprit) {
+		if ($isCulprit) {
+			print "The culprit has been arrested";
+		} else {
+			print "This is not the culprit you idiot!";
+		}
 	}
 }
