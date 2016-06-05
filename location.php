@@ -2,19 +2,24 @@
 
 class Location {
 	 
-	public $locationName;
-	public $findableClues;
+	private $locationName;
+	private $findableClues;
+	
 	
 	public function __construct($locationName){
 		$this->locationName = $locationName;
+		$this->genFindableClues();
 	}
 	
-	public function getFindableClues(){
-		$this->generateClues();
-		return $this->findableClues;
+	public function getLocData(){
+		return array($this->locationName, $this->findableClues);
 	}
 	
-	private function generateClues(){
-		return $this->findableClues = rand(2,8);
+	private function genFindableClues(){
+		$this->findableClues = rand(2,8);
+	}
+	
+	public function findClues(){
+		if()
 	}
 }

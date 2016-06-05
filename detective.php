@@ -2,7 +2,7 @@
 
 class Detective extends Character {
 	public $clues;
-	
+	public $currentLocation;
 	
 	public function __construct($name, $strength, $intelligence, $charisma, $gender, $birthdate){
 		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $birthdate);
@@ -20,6 +20,22 @@ class Detective extends Character {
 		}
 		
 		print $clues;
+	}
+	
+	public function Investigate($location){
+		
+	}
+	
+	public function Interview($suspect){
+		
+	}
+	
+	public function MoveTo($location){
+		$this->currentLocation = $location;
+	}
+	
+	public function ShowStats(){
+		
 	}
 	
 	public function Arrest($isCulprit) {
