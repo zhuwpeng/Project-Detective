@@ -20,6 +20,6 @@ class Location {
 	}
 	
 	public function findClues(){
-		if()
+
 	}
 }

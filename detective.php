@@ -8,26 +8,27 @@ class Detective extends Character {
 		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $birthdate);
 	}
 	
-	public function getClues() {
- 		$intelligence = $this->intelligence;
- 		$clues = $this->clues;
-		if (0 < $intelligence  && $intelligence < 10) {
-			$clues = rand(0,3);
-		} elseif (10 < $intelligence && $intelligence < 20) {
-			$clues = rand(1,5); 
-		} else {
-			$clues = rand(2,8);
-		}
+//Random test that needs to be changed
+// 	public function getClues() {
+//  		$intelligence = $this->intelligence;
+//  		$clues = $this->clues;
+// 		if (0 < $intelligence  && $intelligence < 10) {
+// 			$clues = rand(0,3);
+// 		} elseif (10 < $intelligence && $intelligence < 20) {
+// 			$clues = rand(1,5); 
+// 		} else {
+// 			$clues = rand(2,8);
+// 		}
 		
-		print $clues;
-	}
+// 		print $clues;
+// 	}
 	
 	public function Investigate($location){
-		
+		//Get clues and save into database
 	}
 	
 	public function Interview($suspect){
-		
+		//Get clues from suspect and save into database
 	}
 	
 	public function MoveTo($location){
@@ -35,7 +36,7 @@ class Detective extends Character {
 	}
 	
 	public function ShowStats(){
-		
+		//display numbers of each suspect to determine culprit
 	}
 	
 	public function Arrest($isCulprit) {

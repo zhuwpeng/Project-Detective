@@ -6,6 +6,6 @@ Class clue {
 	public $suspectID;
 	
 	public function setCulpritChance($suspArea){
-		if()
+
 	}
 }
