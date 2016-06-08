@@ -3,7 +3,6 @@
 class Character {
 	
 	public $name;
-	
  	public $strength;
  	public $intelligence;
  	public $charisma;
@@ -35,6 +34,17 @@ class Character {
 		return $this->name;
 	}
 	
+	public function getCharisma(){
+		return $this->charisma;
+	}
+	
+	public function getIntelligence(){
+		return $this->intelligence;
+	}
+	
+	public function getStrength(){
+		return $this->strength;
+	}
 	public function calculateAge($birthday){
 		$born = new DateTime("$birthday");
 		$now = new DateTime("now");

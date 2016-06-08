@@ -1,8 +1,8 @@
 <?php
 
 class Detective extends Character {
-	public $clues;
-	public $currentLocation;
+	private $clues;
+	private $currentLocation;
 	
 	public function __construct($name, $strength, $intelligence, $charisma, $gender, $birthdate){
 		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $birthdate);
@@ -29,6 +29,7 @@ class Detective extends Character {
 	
 	public function Interview($suspect){
 		//Get clues from suspect and save into database
+		$suspect->giveAnswer($charisma);
 	}
 	
 	public function MoveTo($location){
