@@ -1,4 +1,6 @@
 <?php
+include('clue.php');
+
 class Suspect extends Character {
 	
 	private $isCulprit;
@@ -23,17 +25,14 @@ class Suspect extends Character {
 		$this->suspectLoc = $location;
 	}
 	
+	//Gets a random number 
 	public function genSuspAnsChance(){
 		$Chance = rand(0,100);
 	}
 	
-	public function getMaxAnswers(){
-		return $this->$maxNumberOfAnswers;
-	}
-	
 	public function getAnswer($detectiveCharisma){
 		if($Chance < ((($detectiveCharisma/$charisma)*10)+20)){
-			 $answer = new clue();
+			 $answer = new clue($this);
 			 return $answer;
 		}
 	}

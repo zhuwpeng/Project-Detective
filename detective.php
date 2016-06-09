@@ -1,7 +1,8 @@
 <?php
+include('clue.php');
 
 class Detective extends Character {
-	private $clues;
+	private $clues = array();
 	private $currentLocation;
 	
 	public function __construct($name, $strength, $intelligence, $charisma, $gender, $birthdate){
@@ -28,8 +29,9 @@ class Detective extends Character {
 	}
 	
 	public function Interview($suspect){
-		//Get clues from suspect and save into database
-		$suspect->giveAnswer($charisma);
+		//Get clues from suspect
+		
+		$clues() = $suspect->getAnswer($charisma);
 	}
 	
 	public function MoveTo($location){
