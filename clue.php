@@ -8,11 +8,11 @@ Class clue {
 	private $type;
 	private $foundClues;
 	
-	public function __construct($object){
+	public function __construct(){
 		
 	}
 	
-	public function setCulpritChance(){
+	public function setCulpritChance($object){
 		
 	}
 	
