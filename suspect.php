@@ -1,5 +1,5 @@
 <?php
-include('clue.php');
+require_once "clue.php";
 
 class Suspect extends Character {
 	
@@ -8,13 +8,12 @@ class Suspect extends Character {
 	private $suspectID;
 	private $answerChance;
 	private $answer;
-	private $Chance;
+	private $type = "Suspect";
 
 	public function __construct($name, $strength, $intelligence, $charisma, $gender, $birthdate, $isCulprit, $suspectID){
 		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $birthdate);
 		$this->isCulprit = $isCulprit;
 		$this->suspectID = $suspectID;
-		$this->genSuspAnsChance();
 	}
 	
 	public function IsCulprit(){
@@ -25,15 +24,16 @@ class Suspect extends Character {
 		$this->suspectLoc = $location;
 	}
 	
-	//Gets a random number 
-	public function genSuspAnsChance(){
-		$Chance = rand(0,100);
-	}
 	
-	public function getAnswer($detectiveCharisma){
-		if($Chance < ((($detectiveCharisma/$charisma)*10)+20)){
-			 $answer = new clue($this);
-			 return $answer;
+	public function getAnswer($detectiveChar, $detectiveInt){
+		
+		if($this->intelligence < $detectiveInt){
+			if(rand(0,100) < ((($detectiveChar/$charisma)*15)+20)){
+				 $answer = new clue($this, $this->type);
+				 return $answer;
+			}
+		} else {
+			return NULL;
 		}
 	}
 }

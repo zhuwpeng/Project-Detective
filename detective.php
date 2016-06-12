@@ -1,5 +1,4 @@
 <?php
-include('clue.php');
 
 class Detective extends Character {
 	private $clues = array();
@@ -20,7 +19,6 @@ class Detective extends Character {
 // 		} else {
 // 			$clues = rand(2,8);
 // 		}
-		
 // 		print $clues;
 // 	}
 	
@@ -28,10 +26,18 @@ class Detective extends Character {
 		//Get clues and save into database
 	}
 	
-	public function Interview($suspect){
+	public function Interview($allSuspects){
 		//Get clues from suspect
 		
-		$clues() = $suspect->getAnswer($charisma);
+		foreach($allSuspects as $suspect){
+			$clue = $suspect->getAnswer($this->charisma, $this->intelligence);
+			
+			if(!is_null($clue)){
+				$clues[] = $clue;
+			} else {
+				
+			}
+		}
 	}
 	
 	public function MoveTo($location){

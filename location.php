@@ -4,7 +4,8 @@ class Location {
 	 
 	private $locationName;
 	private $findableClues;
-	
+	private $newClue;
+	private $type = "Location";
 	
 	public function __construct($locationName){
 		$this->locationName = $locationName;
@@ -20,6 +21,6 @@ class Location {
 	}
 	
 	public function findClues(){
-
+		$newClue = new clue($this, $this->type);
 	}
 }
