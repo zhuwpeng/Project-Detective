@@ -23,21 +23,13 @@ class Detective extends Character {
 // 	}
 	
 	public function Investigate($location){
-		//Get clues and save into database
+		//Get clues from location
+		$clue = $location->findClues($this->intelligence, $this->power);
 	}
 	
-	public function Interview($allSuspects){
+	public function Interview($suspect){
 		//Get clues from suspect
-		
-		foreach($allSuspects as $suspect){
-			$clue = $suspect->getAnswer($this->charisma, $this->intelligence);
-			
-			if(!is_null($clue)){
-				$clues[] = $clue;
-			} else {
-				
-			}
-		}
+		return $suspect->getAnswer($this->charisma, $this->intelligence);
 	}
 	
 	public function MoveTo($location){

@@ -1,24 +1,26 @@
 <?php
+include('game.php');
 
-include('character.php');
-include('detective.php');
-include('location.php');
-include('suspect.php');
+// $array = array();
 
+// $culprit = new Suspect("Culprit", 5, 5, 2, "Doge", '1950-09-12', True, 1);
+// $person = new Detective("dedede", 2, 10, 4, "Male", '1991-03-25');
 
+// $person->displayStats();
+// $person->arrest($culprit->IsCulprit());
 
-$culprit = new Suspect("Culprit", 5, 5, 2, "Doge", '1950-09-12', True);
-$person = new Detective("dedede", 2, 3, 4, "Male", '1991-03-25');
+// $location = new location("Forest", true);
 
-$person->displayStats();
-$person->arrest($culprit->IsCulprit());
+// $info = $location->getLocData();
 
-$location = new location("Forest");
+// $array[] = $person->Interview($culprit);
 
-$info = $location->getLocData();
+$game = new game();
 
-foreach($info as $data){
-	print $data;
+foreach($game->suspects as $suspect){
+	$suspect->displayStats();
+	print $suspect->isCulprit();
+	print "<br><br>";
 }
 ?>
 

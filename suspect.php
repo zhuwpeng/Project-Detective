@@ -28,12 +28,12 @@ class Suspect extends Character {
 	public function getAnswer($detectiveChar, $detectiveInt){
 		
 		if($this->intelligence < $detectiveInt){
-			if(rand(0,100) < ((($detectiveChar/$charisma)*15)+20)){
-				 $answer = new clue($this, $this->type);
-				 return $answer;
+			if(rand(0,100) < ((($detectiveChar/$this->charisma)*15)+20)){
+				$answer = true;
+			} else {
+				$answer = false;
 			}
-		} else {
-			return NULL;
+			return $answer;
 		}
 	}
 }

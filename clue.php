@@ -4,12 +4,13 @@ Class clue {
 	
 	private $ID;
 	private $type;
-	private $points
+	private $points;
 	private $suspOrLoc;
 	
 	public function __construct($suspOrLoc, $type){
 		$this->suspOrLoc = $suspOrLoc;
 		$this->type = $type;
+		$this->setCulpritChance($this->suspOrLoc);
 	}
 	
 	public function setCulpritChance($suspOrLoc){
@@ -23,9 +24,4 @@ Class clue {
 			
 		}
 	}
-	
-	public function genStats(){
-		
-	}
-
 }
