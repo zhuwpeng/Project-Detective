@@ -9,7 +9,7 @@ class Game{
 	
 	public $locations;
 	public $endGame;
-	public $suspects;
+	private $suspects;
 	
 	public function __construct(){
 		$this->suspects = array();
@@ -33,5 +33,9 @@ class Game{
 				$this->suspects[$i] = new Suspect("Suspect $i", 10, 10, 10, rand(0,1) == 1 ? "male": "female", '', false, $i+1);
 			}
 		}
+	}
+	
+	public function getSuspects(){
+		return $this->suspects;
 	}
 }

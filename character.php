@@ -18,7 +18,7 @@ class Character {
 		$this->age = $age;
 		$this->gender = $gender;
 		
-		if(empty($this->age)){
+		if(empty(trim($this->age))){
 			$this->age = rand(20,60);
 		}
 	}

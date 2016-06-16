@@ -4,8 +4,8 @@ class Detective extends Character {
 	private $clues = array();
 	private $currentLocation;
 	
-	public function __construct($name, $strength, $intelligence, $charisma, $gender, $birthdate){
-		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $birthdate);
+	public function __construct($name, $strength, $intelligence, $charisma, $gender, $age){
+		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $age);
 	}
 	
 //Random test that needs to be changed
@@ -22,6 +22,30 @@ class Detective extends Character {
 // 		print $clues;
 // 	}
 	
+	public function setName($newName){
+		$this->name = $newName;
+	}
+	
+	public function setStr($newStr){
+		$this->strength = $newStrength;
+	}
+	
+	public function setInt($newInt){
+		$this->intelligence = $newInt;
+	}
+	
+	public function setChar($newChar){
+		$this->charisma = $newChar;
+	}
+	
+	public function setGender($newGender){
+		$this->gender = $newGender;
+	}
+	
+	public function setAge($newAge){
+		$this->age = $newAge;
+	}
+	
 	public function Investigate($location){
 		//Get clues from location
 		$clue = $location->findClues($this->intelligence, $this->power);
@@ -29,7 +53,7 @@ class Detective extends Character {
 	
 	public function Interview($suspect){
 		//Get clues from suspect
-		return $suspect->getAnswer($this->charisma, $this->intelligence);
+		return $suspect->getAnswer($this->charisma);
 	}
 	
 	public function MoveTo($location){

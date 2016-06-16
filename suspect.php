@@ -10,8 +10,8 @@ class Suspect extends Character {
 	private $answer;
 	private $type = "Suspect";
 
-	public function __construct($name, $strength, $intelligence, $charisma, $gender, $birthdate, $isCulprit, $suspectID){
-		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $birthdate);
+	public function __construct($name, $strength, $intelligence, $charisma, $gender, $age, $isCulprit, $suspectID){
+		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $age);
 		$this->isCulprit = $isCulprit;
 		$this->suspectID = $suspectID;
 	}
@@ -25,15 +25,16 @@ class Suspect extends Character {
 	}
 	
 	
-	public function getAnswer($detectiveChar, $detectiveInt){
-		
-		if($this->intelligence < $detectiveInt){
-			if(rand(0,100) < ((($detectiveChar/$this->charisma)*15)+20)){
-				$answer = true;
-			} else {
-				$answer = false;
-			}
-			return $answer;
+	public function getAnswer($detectiveChar){
+		if($detectiveChar < $this->charisma){
+			$bonus = 5;
+		} else {
+			$bonus = 10;
+		}
+		if(rand(0,100) < ((($detectiveChar/$this->charisma)*15)+20)+$bonus){
+			return true;
+		}else{
+			return false;
 		}
 	}
 }

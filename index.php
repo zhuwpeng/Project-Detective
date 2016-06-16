@@ -1,5 +1,6 @@
 <?php
 include('game.php');
+session_start();
 
 // $array = array();
 
@@ -15,13 +16,20 @@ include('game.php');
 
 // $array[] = $person->Interview($culprit);
 
-$game = new game();
-
-foreach($game->suspects as $suspect){
+$suspects = $_SESSION['suspects'];
+foreach($suspects as $suspect){
 	$suspect->displayStats();
 	print $suspect->isCulprit();
 	print "<br><br>";
 }
+
+$detective = $_SESSION['detective'];
+$detective->displayStats();
+$clues = array();
+$clues[] = $detective->interview($suspects[1]);
+
+var_dump($clues);
+
 ?>
 
 <!DOCTYPE html>
