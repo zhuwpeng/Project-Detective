@@ -14,11 +14,12 @@ class Location {
 		$this->genFindableClues();
 	}
 	
-	public function getLocData(){
-		return array($this->locationName, $this->findableClues);
+	public function DisplayLocData(){
+		print "Location name: " . $this->locationName . "<br>";
+		print "Findable Clues: " . $this->findableClues . "<br>";
 	}
 	
-	private function getCrimeScene(){
+	public function isCrimeScene(){
 		return $this->isCrimeScene;
 	}
 	
@@ -26,7 +27,7 @@ class Location {
 		$this->findableClues = rand(2,8);
 	}
 	
-	public function findClues($detectiveInt, $detectivePow, $culprit){
-		$newClue = new clue($this, $this->type);
+	public function findClues($detectiveInt, $detectivePow){
+		
 	}
 }

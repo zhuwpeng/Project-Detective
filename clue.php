@@ -14,14 +14,18 @@ Class clue {
 	}
 	
 	public function setCulpritChance($suspOrLoc){
-		if($this->type == "Suspect"){
-			if($suspOrLoc->IsCulprit()){
-				$points = rand(2, 5);
+		if ($this->type == "Suspect"){
+			if($suspOrLoc->isCulprit()){
+				$this->points = rand(2, 5);
 			} else {
-				$points = rand(0, 2);
+				$this->points = rand(0, 2);
 			}
-		}else {
-			
+		} else {
+			if($suspOrLoc->isCrimeScene()){
+				$this->points = rand(2, 5);
+			} else {
+				$this->ponts = rand(0, 2);
+			}
 		}
 	}
 }

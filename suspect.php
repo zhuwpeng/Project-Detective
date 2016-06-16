@@ -16,7 +16,7 @@ class Suspect extends Character {
 		$this->suspectID = $suspectID;
 	}
 	
-	public function IsCulprit(){
+	public function isCulprit(){
 		return $this->isCulprit;
 	}
 	

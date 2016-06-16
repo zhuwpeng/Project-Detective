@@ -17,13 +17,21 @@ session_start();
 // $array[] = $person->Interview($culprit);
 
 $suspects = $_SESSION['suspects'];
+$locations = $_SESSION['locations'];
+$detective = $_SESSION['detective'];
+
 foreach($suspects as $suspect){
 	$suspect->displayStats();
 	print $suspect->isCulprit();
 	print "<br><br>";
 }
 
-$detective = $_SESSION['detective'];
+foreach($locations as $location){
+	$location->DisplayLocData();
+	print $location->isCrimeScene();
+	print "<br><br>";
+}
+
 $detective->displayStats();
 $clues = array();
 $clues[] = $detective->interview($suspects[1]);
