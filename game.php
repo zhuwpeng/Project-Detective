@@ -17,11 +17,6 @@ class Game{
 		$this->generateSuspLoc();
 	}
 	
-	public function _newGame(){
-		$this->location = $location;
-		
-	}
-	
 	private function generateSuspLoc(){
 		$numSusp = rand(3,6);
 		$culprit = rand(1,$numSusp);

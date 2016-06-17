@@ -1,39 +1,190 @@
-/*------- Wrapper ---------*/
-
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/*====== Colors ==========*/
+/*====== Wrapper =========*/
 #wrapper {
-    background-color: brown;
-    overflow: auto;
+  outline: 1px solid black;
+  overflow: auto;
 }
-
 /*======= Layout =========*/
-
-.left-column {
-    
+body {
+  margin: 10px;
 }
-
 .panel {
-    outline: 1px solid black;
-    margin: 0 10px 10px;   
-    float: left;
-    display: block;
-    clear: left;
-    width: 260px;
+  outline: 1px solid black;
+  margin: 10px 10px;
+  float: left;
+  display: block;
+  clear: left;
+  width: 260px;
+  overflow: hidden;
 }
-
 .panel-heading {
-    padding: 10px 15px;
-    background-color: cadetblue;
+  padding: 10px 15px;
+  background-color: cadetblue;
 }
-
-.panel .panel-body {
-
-}
-
 .main-content {
-    background-color: chartreuse;
-    margin-left: 280px;
-    margin-right: 10px;
-    min-width: 300px;
-    
+  background-color: #ffff00;
+  margin-left: 280px;
+  margin-right: 10px;
+  min-width: 300px;
 }
-
+/*======= Navigation =========*/
+.nav-bar {
+  margin-top: 10px;
+}
+.nav-bar ul {
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+}
+.nav-bar ul li {
+  float: left;
+}
+.nav-bar ul li a {
+  display: block;
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 20px 20px 0px 0px;
+}
+.nav-bar ul li a:hover {
+  background-color: darkgreen;
+}
+.nav-bar ul li a:focus {
+  background-color: yellow;
+}
+/*====== Main-content =========*/
+.main-content {
+  border: 1px solid black;
+}
+.main-content h1 {
+  margin: 0px;
+}

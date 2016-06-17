@@ -1,8 +1,8 @@
 <?php
 
 class Detective extends Character {
-	private $clues = array();
-	private $currentLocation;
+
+	public $time = 12;
 	
 	public function __construct($name, $strength, $intelligence, $charisma, $gender, $age){
 		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $age);
@@ -44,6 +44,10 @@ class Detective extends Character {
 	
 	public function setAge($newAge){
 		$this->age = $newAge;
+	}
+	
+	public function getTime(){
+		return $this->time;
 	}
 	
 	public function Investigate($location){
