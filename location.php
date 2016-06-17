@@ -23,6 +23,10 @@ class Location {
 		return $this->isCrimeScene;
 	}
 	
+	public function getLocationName(){
+		return $this->locationName;
+	}
+	
 	private function genFindableClues(){
 		$this->findableClues = rand(2,8);
 	}

@@ -1,5 +1,6 @@
 <?php
 include('game.php');
+include('form.php');
 session_start();
 
 // $array = array();
@@ -15,6 +16,8 @@ session_start();
 // $info = $location->getLocData();
 
 // $array[] = $person->Interview($culprit);
+
+$form = new form();
 
 $suspects = $_SESSION['suspects'];
 $locations = $_SESSION['locations'];
@@ -46,9 +49,10 @@ var_dump($clues);
 </head>
 <body>
 	<form method = "POST" action="index.php">
-		<label for="name">Name</label>
-		<input type="text" name="name" id="name">
-		<input type="submit" name="submit" value="Go">
+		<?php 
+		$form->dropdown($suspects, "Suspect");
+		$form->dropdown($locations, "Location");
+		?>
 	</form>
 </body>
 </html>
