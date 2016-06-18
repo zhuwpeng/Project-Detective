@@ -57,7 +57,7 @@ class Detective extends Character {
 	
 	public function Investigate($location, $numOfSusp, $culpritID){
 		//Get clues from location
-		$clue = $location->findClues($this->intelligence, $this->strength, $numOfSusp, $culpritID);
+		return $location->findClues($this->intelligence, $this->strength, $numOfSusp, $culpritID);
 	}
 	
 	public function Interview($suspect, $numOfSusp, $culpritID){
@@ -71,14 +71,34 @@ class Detective extends Character {
 	
 	public function ShowStats($allClues){
 		//display numbers of each suspect to determine culprit
+		$stats = array();
 		
+// 		foreach($allClues as $subarray){
+// 			foreach($subarray as $answer){
+// 				foreach($answer as $clueObject){
+// 					$stats[] = $clueObject->getStats();
+// 				}
+// 			}
+// 		}
+
+		foreach($allClues as $subarray){
+				foreach($subarray as $clueObject){
+					$stats[] = $clueObject->getStats();
+			}
+		}
+		
+		$final = array();
+		
+		array_walk_recursive($stats, function($item, $key) use (&$final){$final[$key] = isset($final[$key])?$item + $final[$key] : $item;});
+		
+		return $final;
 	}
 	
 	public function Arrest($isCulprit) {
 		if ($isCulprit) {
-			print "The culprit has been arrested";
+			print "<h1>The culprit has been arrested!</h1>";
 		} else {
-			print "This is not the culprit you idiot!";
+			print "<h1>That was not the culprit you idiot!</h1>";
 		}
 	}
 }

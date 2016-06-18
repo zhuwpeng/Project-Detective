@@ -7,7 +7,7 @@ class Location {
 	private $findableClues;
 	private $requiredInt;
 	private $requiredStr;
-	private $newClue;
+	private $newClues;
 	private $isCrimeScene;
 	private $type = "Location";
 	
@@ -18,6 +18,7 @@ class Location {
 		$this->genFindableClues();
 		$this->requiredInt = rand(5,20);
 		$this->requiredStr = rand(10,25);
+		$this->newClues = array();
 	}
 	
 	public function DisplayLocData(){
@@ -41,7 +42,11 @@ class Location {
 		$this->findableClues = rand(2,8);
 	}
 	
-	public function findClues($detectiveInt, $detectiveStr){
+	public function getRequiredInt(){
+		return $this->requiredInt;
+	}
+	
+	public function findClues($detectiveInt, $detectiveStr, $numOfSusp, $culpritID){
 		if($detectiveInt < $this->requiredInt){
 			$bonus = 5;
 		} else {
@@ -49,9 +54,15 @@ class Location {
 		}
 		
 		if(rand(0,100) < ((($detectiveChar/$this->requiredInt)*15)+20)+$bonus){
-			return true;
+			$foundClues = rand(1,3);
 		}else{
-			return false;
+			$foundClues = rand(0,1);
 		}
+		
+		for($i = 0; $i < $foundClues; $i++){
+			$this->newClues[$i] = new clue($this->name, $this->type, $numOfSusp, $culpritID);
+		}
+		
+		return $this->newClues;
 	}
 }

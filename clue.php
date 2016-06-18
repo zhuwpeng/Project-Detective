@@ -7,7 +7,7 @@ Class clue {
 	private $culpritID;
 	private $numberOfSusp;
 	
-	public function __construct($name, $type, $culpritID, $numberOfSusp){
+	public function __construct($name, $type, $numberOfSusp, $culpritID){
 		$this->from = $name;
 		$this->type = $type;
 		$this->numberOfSusp = $numberOfSusp;

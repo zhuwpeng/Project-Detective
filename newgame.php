@@ -10,8 +10,9 @@ if(isset($_POST['confirm']) && $_POST['confirm']=="Confirm"){
 	$_SESSION['suspects'] = $game->getSuspects();
 	$_SESSION['locations'] = $game->getLocations();
 	$_SESSION['game'] = $game;
-	$_SESSION['Interview'] = array();
-	$_SESSION['Investigate'] = array();
+// 	$_SESSION['Interview'] = array();
+// 	$_SESSION['Investigate'] = array();
+	$_SESSION['allClues'] = array();
 	header('Location: index.php');
 }
 

@@ -2,20 +2,6 @@
 include 'game.php';
 session_start();
 
-// $array = array();
-
-// $culprit = new Suspect("Culprit", 5, 5, 2, "Doge", '1950-09-12', True, 1);
-// $person = new Detective("dedede", 2, 10, 4, "Male", '1991-03-25');
-
-// $person->displayStats();
-// $person->arrest($culprit->IsCulprit());
-
-// $location = new location("Forest", true);
-
-// $info = $location->getLocData();
-
-// $array[] = $person->Interview($culprit);
-
 $game = $_SESSION['game'];
 $suspects = $_SESSION['suspects'];
 $locations = $_SESSION['locations'];
@@ -23,19 +9,21 @@ $detective = $_SESSION['detective'];
 $time = $_SESSION['time'];
 $answers = $_SESSION['Interview'];
 $clues = $_SESSION['Investigate'];
-
+$allClues = $_SESSION['allClues'];
 
 foreach($suspects as $suspect){
 	$suspect->displayStats();
-	print $suspect->isCulprit();
+	//print $suspect->isCulprit();
 	print "<br><br>";
 }
 
-// foreach($locations as $location){
-// 	$location->DisplayLocData();
-// 	print $location->isCrimeScene();
-// 	print "<br><br>";
-// }
+foreach($locations as $location){
+	$location->DisplayLocData();
+	//print $location->isCrimeScene();
+	//print $location->getRequiredInt();
+	print "<br><br>";
+	
+}
 
 if(isset($_GET['page']) && ($_GET['page'] == "Interviewed" || $_GET['page'] == "Investigated")){
 	
@@ -51,17 +39,22 @@ if(isset($_POST['action']) && $_POST['action'] == 1){
 			$_SESSION['time'] = $detective->getTime();
 			if(isset($_POST['interview']) && $_POST['interview']=="Interview"){
 				//store boolean returned from interview in $answers array
-				$answers[$_POST['Suspect']] = $game->action($_POST['interview'], $detective, $_POST['Suspect'], $suspects);
+				//$answers[$_POST['Suspect']] = $game->action($_POST['interview'], $detective, $_POST['Suspect'], $suspects);
+				$allClues[] = $game->action($_POST['interview'], $detective, $_POST['Suspect'], $suspects);
 				//save the $answers array in Session
-				$_SESSION['Interview'] = $answers;
+				//$_SESSION['Interview'] = $answers;
+				$_SESSION['allClues'] = $allClues;
 				unset($_POST['interview']);
+				
 				//Redirect to prevent form resubmission
 				header("Location: index.php?page=Interviewed");
 			}
 		
 			if(isset($_POST['investigate']) && $_POST['investigate']=="Investigate"){
-				$clues[$_POST['Location']] = $game->action($_POST['investigate'], $detective, $_POST['Location'], $locations);
-				$_SESSION['Investigate'] = $clues;
+				//$clues[$_POST['Location']] = $game->action($_POST['investigate'], $detective, $_POST['Location'], $locations);
+				//$_SESSION['Investigate'] = $clues;
+				$allClues[] = $game->action($_POST['investigate'], $detective, $_POST['Location'], $locations);
+				$_SESSION['allClues'] = $allClues;
 				unset($_POST['investigate']);
 				header("Location: index.php?page=Investigated");
 			}
@@ -78,18 +71,12 @@ if(isset($_POST['unmask']) && $_POST['unmask']=="Unmask"){
 	$detective->arrest($culprit->isCulprit());
 }
 
-foreach($answers as $answer){
-	foreach($answer as $details){
-		$stats = $details->getStats();
-		
-		foreach($stats as $points){
-			echo $points . "<br>";
-		}
-	}
-}
-
-var_dump($clues);
-
+// print "<br><br>";
+// var_dump($clues);
+// print "<br><br>";
+// var_dump($answers);
+// print "<br><br>";
+// var_dump($allClues);
 ?>
 
 <!DOCTYPE html>
@@ -123,7 +110,13 @@ var_dump($clues);
 		}
 		
 		if(isset($_GET['page']) && $_GET['page'] == "Statistics"){
+			$allpoints = $detective->ShowStats($allClues);
 			
+			$number = 1;
+			
+			foreach($allpoints as $points){
+				echo "Suspect " . $number++ . " chance " . $points . "<br>";
+			}
 		}
 		
 		if (isset($_GET['page']) && $_GET['page'] == "Unmask"){

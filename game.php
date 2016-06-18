@@ -62,9 +62,9 @@ class Game{
 	
 	public function action($action, $detective, $suspLocNum, $suspLocArray){
 		if($action == "Interview"){
-			return $detective->interview($suspLocArray[$suspLocNum], $this->numSusp, $this->culprit);
+			return $detective->Interview($suspLocArray[$suspLocNum], $this->numSusp, $this->culprit);
 		} else {
-			return $detective->investigate($suspLocArray[$suspLocNum], $this->numSusp, $this->culprit);
+			return $detective->Investigate($suspLocArray[$suspLocNum], $this->numSusp, $this->culprit);
 		}
 	}
 	
