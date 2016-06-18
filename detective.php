@@ -2,8 +2,7 @@
 
 class Detective extends Character {
 
-	public $time = 12;
-	
+	private $time = 12;
 	public function __construct($name, $strength, $intelligence, $charisma, $gender, $age){
 		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $age);
 	}
@@ -50,22 +49,29 @@ class Detective extends Character {
 		return $this->time;
 	}
 	
-	public function Investigate($location){
+	public function reduceTime($reduction){
+		//Reduce available time after each action
+		$this->time = $this->time - $reduction;
+		
+	}
+	
+	public function Investigate($location, $numOfSusp, $culpritID){
 		//Get clues from location
-		$clue = $location->findClues($this->intelligence, $this->power);
+		$clue = $location->findClues($this->intelligence, $this->strength, $numOfSusp, $culpritID);
 	}
 	
-	public function Interview($suspect){
+	public function Interview($suspect, $numOfSusp, $culpritID){
 		//Get clues from suspect
-		return $suspect->getAnswer($this->charisma);
+		return $suspect->getAnswer($this->charisma, $numOfSusp, $culpritID);
 	}
 	
-	public function MoveTo($location){
-		$this->currentLocation = $location;
-	}
+// 	public function MoveTo($location){
+// 		$this->currentLocation = $location;
+// 	}
 	
-	public function ShowStats(){
+	public function ShowStats($allClues){
 		//display numbers of each suspect to determine culprit
+		
 	}
 	
 	public function Arrest($isCulprit) {
