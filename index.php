@@ -2,81 +2,85 @@
 include 'game.php';
 session_start();
 
-$game = $_SESSION['game'];
-$suspects = $_SESSION['suspects'];
-$locations = $_SESSION['locations'];
-$detective = $_SESSION['detective'];
-$time = $_SESSION['time'];
-$answers = $_SESSION['Interview'];
-$clues = $_SESSION['Investigate'];
-$allClues = $_SESSION['allClues'];
-
-foreach($suspects as $suspect){
-	$suspect->displayStats();
-	//print $suspect->isCulprit();
-	print "<br><br>";
-}
-
-foreach($locations as $location){
-	$location->DisplayLocData();
-	//print $location->isCrimeScene();
-	//print $location->getRequiredInt();
-	print "<br><br>";
+if(!empty($_SESSION['game'])){
+	$game = $_SESSION['game'];
+	$suspects = $_SESSION['suspects'];
+	$locations = $_SESSION['locations'];
+	$detective = $_SESSION['detective'];
+	$time = $_SESSION['time'];
+	// $answers = $_SESSION['Interview'];
+	// $clues = $_SESSION['Investigate'];
+	$allClues = $_SESSION['allClues'];
 	
-}
-
-if(isset($_GET['page']) && ($_GET['page'] == "Interviewed" || $_GET['page'] == "Investigated")){
-	
-}
-
-$detective->displayStats();
-print $time . " Hours left <br>";
-
-if(isset($_POST['action']) && $_POST['action'] == 1){
-	try {
-		if ($detective->getTime() > 0 ) {
-			$detective->reduceTime(2);
-			$_SESSION['time'] = $detective->getTime();
-			if(isset($_POST['interview']) && $_POST['interview']=="Interview"){
-				//store boolean returned from interview in $answers array
-				//$answers[$_POST['Suspect']] = $game->action($_POST['interview'], $detective, $_POST['Suspect'], $suspects);
-				$allClues[] = $game->action($_POST['interview'], $detective, $_POST['Suspect'], $suspects);
-				//save the $answers array in Session
-				//$_SESSION['Interview'] = $answers;
-				$_SESSION['allClues'] = $allClues;
-				unset($_POST['interview']);
-				
-				//Redirect to prevent form resubmission
-				header("Location: index.php?page=Interviewed");
-			}
-		
-			if(isset($_POST['investigate']) && $_POST['investigate']=="Investigate"){
-				//$clues[$_POST['Location']] = $game->action($_POST['investigate'], $detective, $_POST['Location'], $locations);
-				//$_SESSION['Investigate'] = $clues;
-				$allClues[] = $game->action($_POST['investigate'], $detective, $_POST['Location'], $locations);
-				$_SESSION['allClues'] = $allClues;
-				unset($_POST['investigate']);
-				header("Location: index.php?page=Investigated");
-			}
-		}else {
-			throw new Exception("You don't have any time left to interview suspects or investigate areas!");
-		}
-	} catch (Exception $ex) {
-		echo $ex->getMessage();
+	foreach($suspects as $suspect){
+		$suspect->displayStats();
+		//print $suspect->isCulprit();
+		print "<br><br>";
 	}
+	
+	foreach($locations as $location){
+		$location->DisplayLocData();
+		//print $location->isCrimeScene();
+		//print $location->getRequiredInt();
+		print "<br><br>";
+		
+	}
+	
+	if(isset($_GET['page']) && ($_GET['page'] == "Interviewed" || $_GET['page'] == "Investigated")){
+		
+	}
+	
+	$detective->displayStats();
+	print $time . " Hours left <br>";
+	
+	if(isset($_POST['action']) && $_POST['action'] == 1){
+		try {
+			if ($detective->getTime() > 0 ) {
+				$detective->reduceTime(2);
+				$_SESSION['time'] = $detective->getTime();
+				if(isset($_POST['interview']) && $_POST['interview']=="Interview"){
+					//store boolean returned from interview in $answers array
+					//$answers[$_POST['Suspect']] = $game->action($_POST['interview'], $detective, $_POST['Suspect'], $suspects);
+					$allClues[] = $game->action($_POST['interview'], $detective, $_POST['Suspect'], $suspects);
+					//save the $answers array in Session
+					//$_SESSION['Interview'] = $answers;
+					$_SESSION['allClues'] = $allClues;
+					unset($_POST['interview']);
+					
+					//Redirect to prevent form resubmission
+					header("Location: index.php?page=Interviewed");
+				}
+			
+				if(isset($_POST['investigate']) && $_POST['investigate']=="Investigate"){
+					//$clues[$_POST['Location']] = $game->action($_POST['investigate'], $detective, $_POST['Location'], $locations);
+					//$_SESSION['Investigate'] = $clues;
+					$allClues[] = $game->action($_POST['investigate'], $detective, $_POST['Location'], $locations);
+					$_SESSION['allClues'] = $allClues;
+					unset($_POST['investigate']);
+					header("Location: index.php?page=Investigated");
+				}
+			}else {
+				throw new Exception("You don't have any time left to interview suspects or investigate areas!");
+			}
+		} catch (Exception $ex) {
+			echo $ex->getMessage();
+		}
+	}
+	
+	if(isset($_POST['unmask']) && $_POST['unmask']=="Unmask"){
+		$culprit = $suspects[$_POST['Suspect']];
+		$detective->arrest($culprit->isCulprit());
+	}
+	
+	// print "<br><br>";
+	// var_dump($clues);
+	// print "<br><br>";
+	// var_dump($answers);
+	// print "<br><br>";
+	// var_dump($allClues);
+} else {
+	header("Location: newgame.php");
 }
-
-if(isset($_POST['unmask']) && $_POST['unmask']=="Unmask"){
-	$culprit = $suspects[$_POST['Suspect']];
-	$detective->arrest($culprit->isCulprit());
-}
-
-// print "<br><br>";
-// var_dump($clues);
-// print "<br><br>";
-// var_dump($answers);
-// print "<br><br>";
-// var_dump($allClues);
 ?>
 
 <!DOCTYPE html>

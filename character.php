@@ -2,12 +2,12 @@
 
 class Character {
 	
-	public $name;
- 	public $strength;
- 	public $intelligence;
- 	public $charisma;
- 	public $gender;
- 	public $age;
+	private $name;
+ 	private $strength;
+ 	private $intelligence;
+ 	private $charisma;
+ 	private $gender;
+ 	private $age;
 	
  	//Constructor
 	public function __construct($name, $strength, $intelligence, $charisma, $gender, $age) {

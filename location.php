@@ -42,27 +42,39 @@ class Location {
 		$this->findableClues = rand(2,8);
 	}
 	
+	private function reduceFindableClues($numberOfClues){
+		$this->findableClues = $this->findableClues - $numberOfClues;
+	}
+	
 	public function getRequiredInt(){
 		return $this->requiredInt;
 	}
 	
 	public function findClues($detectiveInt, $detectiveStr, $numOfSusp, $culpritID){
-		if($detectiveInt < $this->requiredInt){
-			$bonus = 5;
-		} else {
-			$bonus = 10;
-		}
+		if($this->findableClues > 0){
+			if($detectiveInt < $this->requiredInt){
+				$bonus = 5;
+			} else {
+				$bonus = 10;
+			}
+			
+			if(rand(0,100) < ((($detectiveChar/$this->requiredInt)*15)+20)+$bonus){
+				$foundClues = rand(1,3);
+			}else{
+				$foundClues = rand(0,1);
+			}
+			
+			if($this->findableClues - $foundClues < -1){
+				$foundClues = $this->findableClues;
+			}
+			
+			$this->reduceFindableClues($foundClues);
+			
+			for($i = 0; $i < $foundClues; $i++){
+				$this->newClues[$i] = new clue($this->name, $this->type, $numOfSusp, $culpritID);
+			}
+			return $this->newClues;
+		} 
 		
-		if(rand(0,100) < ((($detectiveChar/$this->requiredInt)*15)+20)+$bonus){
-			$foundClues = rand(1,3);
-		}else{
-			$foundClues = rand(0,1);
-		}
-		
-		for($i = 0; $i < $foundClues; $i++){
-			$this->newClues[$i] = new clue($this->name, $this->type, $numOfSusp, $culpritID);
-		}
-		
-		return $this->newClues;
 	}
 }
