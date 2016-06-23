@@ -4,6 +4,9 @@ include 'clue.php';
 include 'detective.php';
 include 'location.php';
 include 'suspect.php';
+include 'log4php/Logger.php';
+
+Logger::configure('loggingconfiguration.xml');
 
 class Game{
 	
@@ -13,11 +16,15 @@ class Game{
 	private $locations;
 	private $culprit;
 	private $crimeScene;
+	private $log;
 	
 	public function __construct(){
 		$this->suspects = array();
 		$this->locations = array();
+		$log = Logger::getLogger(__CLASS__);
+		$this->log = $log;
 		$this->generateSuspLoc();
+		
 	}
 	
 	public function getSuspects(){
@@ -74,21 +81,32 @@ class Game{
 	
 		$this->numLoc = rand(2,4);
 		$this->crimeScene = rand(1, $this->numLoc);
-	
+		
+		$this->log->info("Generating Locations and Suspects");
+		$this->log->info("Locations generated: " . $this->numLoc);
 		for($i = 1; $i <= $this->numLoc; $i++){
 			if($i == $this->crimeScene){
-				$this->locations[$i] = new Location("Location $i", true, $i);
+				$crime = true;
 			} else {
-				$this->locations[$i] = new Location("Location $i", false, $i);
+				$crime = false;
 			}
+			
+			$this->locations[$i] = new Location("Location $i", $crime, $i);
+			$this->log->info("Location " . $this->locations[$i]->getLocationID() . ", Crimescene: " . $this->locations[$i]->isCrimeScene() . ", Findable Clues: " . $this->locations[$i]->getFindableClues());
 		}
 	
+		$this->log->info("Suspects generated: " . $this->numSusp);
 		for($i = 1; $i <= $this->numSusp; $i++){
 			if($i == $this->culprit){
-				$this->suspects[$i] = new Suspect("Suspect $i", 10, 10, 10, rand(0,1) == 1 ? "male": "female", '', true, $i+1, $crimeScene);
+				$killer = True;
+				$lastSeen = $this->crimeScene;
 			}else{
-				$this->suspects[$i] = new Suspect("Suspect $i", 10, 10, 10, rand(0,1) == 1 ? "male": "female", '', false, $i+1, rand(1, $numLoc));
+				$killer = False;
+				$lastSeen = rand(1, $this->numLoc);
 			}
+			
+			$this->suspects[$i] = new Suspect("Suspect $i", 10, 10, 10, rand(0,1) == 1 ? "male": "female", '', $killer, $i+1, $lastSeen);
+			$this->log->info("Suspect " . $i . ", Stats str/int/char: " . $this->suspects[$i]->getStrength() . ", " . $this->suspects[$i]->getIntelligence() . ", " . $this->suspects[$i]->getCharisma() . ", Gender: " .  $this->suspects[$i]->getGender(). ", Killer: " . $this->suspects[$i]->isCulprit() . ", Last Seen: " .  $this->suspects[$i]->getSuspectLoc());
 		}
 	}
 }

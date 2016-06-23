@@ -49,6 +49,10 @@ class Character {
 	public function getStrength(){
 		return $this->strength;
 	}
+	
+	public function getGender() {
+		return $this->gender;
+	}
 // 	public function calculateAge($birthday){
 // 		$born = new DateTime("$birthday");
 // 		$now = new DateTime("now");

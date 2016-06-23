@@ -38,6 +38,10 @@ class Location {
 		return $this->locationID;
 	}
 	
+	public function getFindableClues(){
+		return $this->findableClues;
+	}
+	
 	private function genFindableClues(){
 		$this->findableClues = rand(2,8);
 	}

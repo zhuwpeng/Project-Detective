@@ -15,6 +15,7 @@ if(!empty($_SESSION['game'])){
 	foreach($suspects as $suspect){
 		$suspect->displayStats();
 		//print $suspect->isCulprit();
+		print $suspect->getSuspectLoc();
 		print "<br><br>";
 	}
 	
