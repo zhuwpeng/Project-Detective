@@ -1,9 +1,8 @@
 <?php
 
 class Detective extends Character {
-	private $clues = array();
-	private $currentLocation;
-	
+
+	private $time = 12;
 	public function __construct($name, $strength, $intelligence, $charisma, $gender, $age){
 		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $age);
 	}
@@ -46,29 +45,60 @@ class Detective extends Character {
 		$this->age = $newAge;
 	}
 	
-	public function Investigate($location){
+	public function getTime(){
+		return $this->time;
+	}
+	
+	public function reduceTime($reduction){
+		//Reduce available time after each action
+		$this->time = $this->time - $reduction;
+		
+	}
+	
+	public function Investigate($location, $numOfSusp, $culpritID){
 		//Get clues from location
-		$clue = $location->findClues($this->intelligence, $this->power);
+		return $location->findClues($this->intelligence, $this->strength, $numOfSusp, $culpritID);
 	}
 	
-	public function Interview($suspect){
+	public function Interview($suspect, $numOfSusp, $culpritID){
 		//Get clues from suspect
-		return $suspect->getAnswer($this->charisma);
+		return $suspect->getAnswer($this->charisma, $numOfSusp, $culpritID);
 	}
 	
-	public function MoveTo($location){
-		$this->currentLocation = $location;
-	}
+// 	public function MoveTo($location){
+// 		$this->currentLocation = $location;
+// 	}
 	
-	public function ShowStats(){
+	public function ShowStats($allClues){
 		//display numbers of each suspect to determine culprit
+		$stats = array();
+		
+// 		foreach($allClues as $subarray){
+// 			foreach($subarray as $answer){
+// 				foreach($answer as $clueObject){
+// 					$stats[] = $clueObject->getStats();
+// 				}
+// 			}
+// 		}
+
+		foreach($allClues as $subarray){
+				foreach($subarray as $clueObject){
+					$stats[] = $clueObject->getStats();
+			}
+		}
+		
+		$final = array();
+		
+		array_walk_recursive($stats, function($item, $key) use (&$final){$final[$key] = isset($final[$key])?$item + $final[$key] : $item;});
+		
+		return $final;
 	}
 	
 	public function Arrest($isCulprit) {
 		if ($isCulprit) {
-			print "The culprit has been arrested";
+			print "<h1>The culprit has been arrested!</h1>";
 		} else {
-			print "This is not the culprit you idiot!";
+			print "<h1>That was not the culprit you idiot!</h1>";
 		}
 	}
 }

@@ -2,12 +2,12 @@
 
 class Character {
 	
-	public $name;
- 	public $strength;
- 	public $intelligence;
- 	public $charisma;
- 	public $gender;
- 	public $age;
+	private $name;
+ 	private $strength;
+ 	private $intelligence;
+ 	private $charisma;
+ 	private $gender;
+ 	private $age;
 	
  	//Constructor
 	public function __construct($name, $strength, $intelligence, $charisma, $gender, $age) {
@@ -50,8 +50,8 @@ class Character {
 		return $this->strength;
 	}
 	
-	public function genAge(){
-		
+	public function getGender() {
+		return $this->gender;
 	}
 // 	public function calculateAge($birthday){
 // 		$born = new DateTime("$birthday");

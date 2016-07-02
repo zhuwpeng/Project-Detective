@@ -1,31 +1,36 @@
 <?php
 
 Class clue {
-	
-	private $ID;
 	private $type;
-	private $points;
-	private $suspOrLoc;
+	private $points = array();
+	private $name;
+	private $culpritID;
+	private $numberOfSusp;
 	
-	public function __construct($suspOrLoc, $type){
-		$this->suspOrLoc = $suspOrLoc;
+	public function __construct($name, $type, $numberOfSusp, $culpritID){
+		$this->from = $name;
 		$this->type = $type;
-		$this->setCulpritChance($this->suspOrLoc);
+		$this->numberOfSusp = $numberOfSusp;
+		$this->culpritID = $culpritID;
+		$this->setPoints($this->culpritID, $this->numberOfSusp);
 	}
 	
-	public function setCulpritChance($suspOrLoc){
-		if ($this->type == "Suspect"){
-			if($suspOrLoc->isCulprit()){
-				$this->points = rand(2, 5);
+	public function displayClueDetails(){
+		print $this->name . "<br>";
+		print $this->type . "<br>";
+	}
+	
+	public function setPoints($culpritID, $numberOfSusp){
+		for($i = 1; $i <= $numberOfSusp; $i++){
+			if ($i == $culpritID){
+				$this->points[$i] = rand(2, 5);
 			} else {
-				$this->points = rand(0, 2);
-			}
-		} else {
-			if($suspOrLoc->isCrimeScene()){
-				$this->points = rand(2, 5);
-			} else {
-				$this->ponts = rand(0, 2);
+				$this->points[$i] = rand(0, 2);
 			}
 		}
+	}
+	
+	public function getStats(){
+		return $this->points;
 	}
 }
