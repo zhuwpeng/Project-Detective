@@ -1,20 +1,23 @@
-2016-06-23T17:43:25+02:00 Game INFO  Generating Locations and Suspects
-2016-06-23T17:43:25+02:00 Game INFO  Locations generated: 3
-2016-06-23T17:43:25+02:00 Game INFO  Location 1, Crimescene: 1, Findable Clues: 6
-2016-06-23T17:43:25+02:00 Game INFO  Location 2, Crimescene: , Findable Clues: 7
-2016-06-23T17:43:25+02:00 Game INFO  Location 3, Crimescene: , Findable Clues: 3
-2016-06-23T17:43:25+02:00 Game INFO  Suspects generated: 3
-2016-06-23T17:43:25+02:00 Game INFO  Suspect 1, Stats str/int/char: 10, 10, 10, Gender: male, Killer: , Last Seen: 1
-2016-06-23T17:43:25+02:00 Game INFO  Suspect 2, Stats str/int/char: 10, 10, 10, Gender: female, Killer: , Last Seen: 1
-2016-06-23T17:43:25+02:00 Game INFO  Suspect 3, Stats str/int/char: 10, 10, 10, Gender: female, Killer: 1, Last Seen: 1
-2016-06-23T17:46:01+02:00 Game INFO  Generating Locations and Suspects
-2016-06-23T17:46:01+02:00 Game INFO  Locations generated: 3
-2016-06-23T17:46:01+02:00 Game INFO  Location 1, Crimescene: , Findable Clues: 3
-2016-06-23T17:46:01+02:00 Game INFO  Location 2, Crimescene: 1, Findable Clues: 3
-2016-06-23T17:46:01+02:00 Game INFO  Location 3, Crimescene: , Findable Clues: 8
-2016-06-23T17:46:01+02:00 Game INFO  Suspects generated: 5
-2016-06-23T17:46:01+02:00 Game INFO  Suspect 1, Stats str/int/char: 10, 10, 10, Gender: male, Killer: , Last Seen: 1
-2016-06-23T17:46:01+02:00 Game INFO  Suspect 2, Stats str/int/char: 10, 10, 10, Gender: male, Killer: , Last Seen: 3
-2016-06-23T17:46:01+02:00 Game INFO  Suspect 3, Stats str/int/char: 10, 10, 10, Gender: male, Killer: 1, Last Seen: 2
-2016-06-23T17:46:01+02:00 Game INFO  Suspect 4, Stats str/int/char: 10, 10, 10, Gender: female, Killer: , Last Seen: 3
-2016-06-23T17:46:01+02:00 Game INFO  Suspect 5, Stats str/int/char: 10, 10, 10, Gender: male, Killer: , Last Seen: 1
+2016-07-02T17:39:02+02:00 Game INFO  Generating Locations and Suspects and Questions
+2016-07-02T17:39:02+02:00 Game INFO  Locations generated: 3
+2016-07-02T17:39:02+02:00 Game INFO  Location 1, Crimescene: 1, Findable Clues: 3
+2016-07-02T17:39:02+02:00 Game INFO  Location 2, Crimescene: , Findable Clues: 5
+2016-07-02T17:39:02+02:00 Game INFO  Location 3, Crimescene: , Findable Clues: 7
+2016-07-02T17:39:02+02:00 Game INFO  Suspects generated: 3
+2016-07-02T17:39:02+02:00 Game INFO  Suspect 1, Stats str/int/char: 10, 10, 10, Gender: female, Killer: , Last Seen: 1, Clothing Shirt/Pants/Shoes: , , 
+2016-07-02T17:39:02+02:00 Game INFO  Suspect 2, Stats str/int/char: 10, 10, 10, Gender: female, Killer: , Last Seen: 1, Clothing Shirt/Pants/Shoes: , , 
+2016-07-02T17:39:02+02:00 Game INFO  Suspect 3, Stats str/int/char: 10, 10, 10, Gender: female, Killer: 1, Last Seen: 1, Clothing Shirt/Pants/Shoes: , , 
+2016-07-02T17:39:02+02:00 Game INFO  Question object: Where were you when the crime happened? created
+2016-07-02T17:39:02+02:00 Game INFO  Question object: Who do you think is the culprit? created
+2016-07-02T17:39:02+02:00 Game INFO  Question object: Can you describe the culprit? created
+2016-07-02T17:46:42+02:00 Game INFO  Generating Locations and Suspects and Questions
+2016-07-02T17:46:42+02:00 Game INFO  Locations generated: 2
+2016-07-02T17:46:42+02:00 Game INFO  Location 1, Crimescene: 1, Findable Clues: 2
+2016-07-02T17:46:42+02:00 Game INFO  Location 2, Crimescene: , Findable Clues: 8
+2016-07-02T17:46:42+02:00 Game INFO  Suspects generated: 3
+2016-07-02T17:46:42+02:00 Game INFO  Suspect 1, Stats str/int/char: 10, 10, 10, Gender: female, Killer: , Last Seen: 2, Clothing Shirt/Pants/Shoes: Black, Black, Yellow
+2016-07-02T17:46:42+02:00 Game INFO  Suspect 2, Stats str/int/char: 10, 10, 10, Gender: male, Killer: 1, Last Seen: 1, Clothing Shirt/Pants/Shoes: Green, Orange, Orange
+2016-07-02T17:46:42+02:00 Game INFO  Suspect 3, Stats str/int/char: 10, 10, 10, Gender: male, Killer: , Last Seen: 1, Clothing Shirt/Pants/Shoes: Orange, Black, Blue
+2016-07-02T17:46:42+02:00 Game INFO  Question object: Where were you when the crime happened? created
+2016-07-02T17:46:42+02:00 Game INFO  Question object: Who do you think is the culprit? created
+2016-07-02T17:46:42+02:00 Game INFO  Question object: Can you describe the culprit? created

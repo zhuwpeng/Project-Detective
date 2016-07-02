@@ -7,16 +7,19 @@ if(!empty($_SESSION['game'])){
 	$suspects = $_SESSION['suspects'];
 	$locations = $_SESSION['locations'];
 	$detective = $_SESSION['detective'];
+	$questions = $_SESSION['questions'];
 	$time = $_SESSION['time'];
 	// $answers = $_SESSION['Interview'];
 	// $clues = $_SESSION['Investigate'];
 	$allClues = $_SESSION['allClues'];
+	$message = "";
 	
 	foreach($suspects as $suspect){
 		$suspect->displayStats();
-		//print $suspect->isCulprit();
-		print $suspect->getSuspectLoc();
-		print "<br><br>";
+		print $suspect->isCulprit();
+		print "Last seen: Location " . $suspect->getSuspectLoc();
+		print "<br>";
+		$suspect->getClothing();
 	}
 	
 	foreach($locations as $location){
@@ -35,36 +38,32 @@ if(!empty($_SESSION['game'])){
 	print $time . " Hours left <br>";
 	
 	if(isset($_POST['action']) && $_POST['action'] == 1){
-		try {
-			if ($detective->getTime() > 0 ) {
-				$detective->reduceTime(2);
-				$_SESSION['time'] = $detective->getTime();
-				if(isset($_POST['interview']) && $_POST['interview']=="Interview"){
-					//store boolean returned from interview in $answers array
-					//$answers[$_POST['Suspect']] = $game->action($_POST['interview'], $detective, $_POST['Suspect'], $suspects);
-					$allClues[] = $game->action($_POST['interview'], $detective, $_POST['Suspect'], $suspects);
-					//save the $answers array in Session
-					//$_SESSION['Interview'] = $answers;
-					$_SESSION['allClues'] = $allClues;
-					unset($_POST['interview']);
-					
-					//Redirect to prevent form resubmission
-					header("Location: index.php?page=Interviewed");
-				}
-			
-				if(isset($_POST['investigate']) && $_POST['investigate']=="Investigate"){
-					//$clues[$_POST['Location']] = $game->action($_POST['investigate'], $detective, $_POST['Location'], $locations);
-					//$_SESSION['Investigate'] = $clues;
-					$allClues[] = $game->action($_POST['investigate'], $detective, $_POST['Location'], $locations);
-					$_SESSION['allClues'] = $allClues;
-					unset($_POST['investigate']);
-					header("Location: index.php?page=Investigated");
-				}
-			}else {
-				throw new Exception("You don't have any time left to interview suspects or investigate areas!");
+		if ($detective->getTime() > 0 ) {
+			$detective->reduceTime(2);
+			$_SESSION['time'] = $detective->getTime();
+			if(isset($_POST['interview']) && $_POST['interview']=="Interview"){
+				//store boolean returned from interview in $answers array
+				//$answers[$_POST['Suspect']] = $game->action($_POST['interview'], $detective, $_POST['Suspect'], $suspects);
+				$allClues[] = $game->action($_POST['interview'], $detective, $_POST['Suspect'], $suspects);
+				//save the $answers array in Session
+				//$_SESSION['Interview'] = $answers;
+				$_SESSION['allClues'] = $allClues;
+				unset($_POST['interview']);
+				
+				//Redirect to prevent form resubmission
+				header("Location: index.php?page=Interviewed");
 			}
-		} catch (Exception $ex) {
-			echo $ex->getMessage();
+		
+			if(isset($_POST['investigate']) && $_POST['investigate']=="Investigate"){
+				//$clues[$_POST['Location']] = $game->action($_POST['investigate'], $detective, $_POST['Location'], $locations);
+				//$_SESSION['Investigate'] = $clues;
+				$allClues[] = $game->action($_POST['investigate'], $detective, $_POST['Location'], $locations);
+				$_SESSION['allClues'] = $allClues;
+				unset($_POST['investigate']);
+				header("Location: index.php?page=Investigated");
+			}
+		}else {
+			$message = "You don't have any time left to interview suspects or investigate areas!";
 		}
 	}
 	
@@ -90,7 +89,10 @@ if(!empty($_SESSION['game'])){
 </head>
 <body>
 	<h1>What would you like to do?</h1>
+	<?php echo $message; ?>
 	<ul>
+		<li><a href="index.php?page=Suspects">Suspects</a></li>
+		<li><a href="index.php?page=Locations">Locations</a></li>
 		<li><a href="index.php?page=Investigate">Investigate</a></li>
 		<li><a href="index.php?page=Interview">Interview</a></li>
 		<li><a href="index.php?page=Statistics">View Statistics</a>
@@ -100,6 +102,7 @@ if(!empty($_SESSION['game'])){
 		<?php 
 		if (isset($_GET['page']) && $_GET['page'] == "Interview"){
 			$game->dropdown($suspects, "Suspect");
+			$game->dropdown($questions, "Question");
 			?>
 			<input type="hidden" name="action" value="1">
 			<?php 

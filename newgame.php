@@ -9,6 +9,7 @@ if(isset($_POST['confirm']) && $_POST['confirm']=="Confirm"){
 	$_SESSION['time'] = $_SESSION['detective']->getTime();
 	$_SESSION['suspects'] = $game->getSuspects();
 	$_SESSION['locations'] = $game->getLocations();
+	$_SESSION['questions'] = $game->getQuestions();
 	$_SESSION['game'] = $game;
 // 	$_SESSION['Interview'] = array();
 // 	$_SESSION['Investigate'] = array();

@@ -68,7 +68,7 @@ class Location {
 				$foundClues = rand(0,1);
 			}
 			
-			if($this->findableClues - $foundClues < -1){
+			if($this->findableClues - $foundClues <= -1){
 				$foundClues = $this->findableClues;
 			}
 			
