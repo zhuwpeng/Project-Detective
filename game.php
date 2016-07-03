@@ -14,7 +14,14 @@ class Game{
 	public $endGame;
 	private $suspects = array();
 	private $numSusp;
-	private $colors = array("Blue", "Red", "Yellow", "Black", "Green", "Purple", "Orange");
+	private $colors = array("0" => array ("Blue", "Red", "Yellow"),
+							"1" => array ("Black", "Green", "Purple"),
+							"2" => array ("Orange", "Blue", "Gray"),
+							"3" => array ("Black", "Green", "Pink"),
+							"4" => array ("Yellow", "Purple", "Red"),
+							"5" => array ("Red", "Orange", "Green"),
+							"6" => array ("Purple", "Blue", "Blue")
+	);
 	private $locations = array();
 	private $numLoc;
 	private $questionString = array();
@@ -22,6 +29,7 @@ class Game{
 	private $culprit;
 	private $crimeScene;
 	private $log;
+	private $time = 12;
 	
 	public function __construct(){
 		$this->suspects = array();
@@ -30,6 +38,16 @@ class Game{
 		$this->log = $log;
 		$this->generateSuspLocQues();
 		
+	}
+	
+	public function getTime(){
+		return $this->time;
+	}
+	
+	public function reduceTime($reduction){
+		//Reduce available time after each action
+		$this->time = $this->time - $reduction;
+	
 	}
 	
 	public function getSuspects(){
@@ -56,6 +74,10 @@ class Game{
 		return $this->crimeScene;
 	}
 	
+	public function getColors($colorCombiID){
+		return $this->colors[$colorCombiID];
+	}
+	
 	public function dropdown($array, $type){
 		$numObjects = count($array);
 		
@@ -64,7 +86,7 @@ class Game{
 			if ($type == "Location"){
 				$Name = $array[$i]->getLocationName();
 			} elseif($type == "Question") {
-				$Name = $array[$i]->getQuestion();
+				$Name = $array[$i];//->getQuestion();
 			}else {
 				$Name = $array[$i]->getName();
 			}
@@ -78,9 +100,9 @@ class Game{
 		print "<input type=\"submit\" name=" . strtolower($action) . " value=" . ucfirst(strtolower($action)) . ">";
 	}
 	
-	public function action($action, $detective, $suspLocNum, $suspLocArray){
+	public function action($action, $detective, $suspLocNum, $suspLocArray, $questionID){
 		if($action == "Interview"){
-			return $detective->Interview($suspLocArray[$suspLocNum], $this->numSusp, $this->culprit);
+			return $detective->Interview($suspLocArray[$suspLocNum], $suspLocArray[$this->culprit], $questionID, $this->numLoc, $this->numSusp, $this->colors);
 		} else {
 			return $detective->Investigate($suspLocArray[$suspLocNum], $this->numSusp, $this->culprit);
 		}
@@ -121,19 +143,15 @@ class Game{
 				$lastSeen = rand(1, $this->numLoc);
 			}
 			
-			$clothing = array();
+			$clothing = rand(0, count($this->colors) - 1);
 			
-			for($x = 0; $x < 3 ; $x++){
-				$clothing[$x] = rand(0, count($this->colors));
-			}
-			
-			$this->suspects[$i] = new Suspect("Suspect $i", 10, 10, 10, rand(0,1) == 1 ? "male": "female", '', $killer, $i+1, $lastSeen, $this->colors[$clothing[0]], $this->colors[$clothing[1]], $this->colors[$clothing[2]]);
-			$this->log->info("Suspect " . $i . ", Stats str/int/char: " . $this->suspects[$i]->getStrength() . ", " . $this->suspects[$i]->getIntelligence() . ", " . $this->suspects[$i]->getCharisma() . ", Gender: " .  $this->suspects[$i]->getGender(). ", Killer: " . $this->suspects[$i]->isCulprit() . ", Last Seen: " .  $this->suspects[$i]->getSuspectLoc() . ", Clothing Shirt/Pants/Shoes: " . $this->colors[$clothing[0]] . ", " . $this->colors[$clothing[1]] . ", " . $this->colors[$clothing[2]]);
+			$this->suspects[$i] = new Suspect("Suspect $i", 10, 10, 10, rand(0,1) == 1 ? "male": "female", '', $killer, $i+1, $lastSeen, $clothing);
+			$this->log->info("Suspect " . $i . ", Stats str/int/char: " . $this->suspects[$i]->getStrength() . ", " . $this->suspects[$i]->getIntelligence() . ", " . $this->suspects[$i]->getCharisma() . ", Gender: " .  $this->suspects[$i]->getGender(). ", Killer: " . $this->suspects[$i]->isCulprit() . ", Last Seen: " .  $this->suspects[$i]->getSuspectLoc() . ", Clothing Shirt/Pants/Shoes: " . $this->colors[$clothing][0] . ", " . $this->colors[$clothing][1] . ", " . $this->colors[$clothing][2]);
 		}
 		
 		for ($i = 1; $i <= count($this->questionString); $i++){
-			$this->questions[$i] = new Question($this->questionString[$i]);
-			$this->log->info("Question object: " . $this->questionString[$i] . " created");
+			$this->questions[$i] = new Question($i, $this->questionString[$i]);
+			$this->log->info("Question object: " . $this->questionString[$i] . " with ID " . $i ." created");
 		}
 	}
 }

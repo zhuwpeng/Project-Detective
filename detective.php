@@ -2,7 +2,7 @@
 
 class Detective extends Character {
 
-	private $time = 12;
+	
 	public function __construct($name, $strength, $intelligence, $charisma, $gender, $age){
 		parent::__construct($name, $strength, $intelligence, $charisma, $gender, $age);
 	}
@@ -45,54 +45,44 @@ class Detective extends Character {
 		$this->age = $newAge;
 	}
 	
-	public function getTime(){
-		return $this->time;
-	}
-	
-	public function reduceTime($reduction){
-		//Reduce available time after each action
-		$this->time = $this->time - $reduction;
-		
-	}
-	
-	public function Investigate($location, $numOfSusp, $culpritID){
+	public function Investigate($location, $numOfSusp, $culprit){
 		//Get clues from location
-		return $location->findClues($this->intelligence, $this->strength, $numOfSusp, $culpritID);
+		return $location->findClues($this->intelligence, $this->strength, $numOfSusp, $culprit);
 	}
 	
-	public function Interview($suspect, $numOfSusp, $culpritID){
+	public function Interview($suspect, $culprit, $questionID, $numLoc, $numSusp, $colors){
 		//Get clues from suspect
-		return $suspect->getAnswer($this->charisma, $numOfSusp, $culpritID);
+		return $suspect->getAnswer($this->charisma, $culprit, $questionID, $numLoc, $numSusp, $colors);
 	}
 	
 // 	public function MoveTo($location){
 // 		$this->currentLocation = $location;
 // 	}
 	
-	public function ShowStats($allClues){
-		//display numbers of each suspect to determine culprit
-		$stats = array();
+// 	public function ShowStats($allClues){
+// 		//display numbers of each suspect to determine culprit
+// 		$stats = array();
 		
+// // 		foreach($allClues as $subarray){
+// // 			foreach($subarray as $answer){
+// // 				foreach($answer as $clueObject){
+// // 					$stats[] = $clueObject->getStats();
+// // 				}
+// // 			}
+// // 		}
+
 // 		foreach($allClues as $subarray){
-// 			foreach($subarray as $answer){
-// 				foreach($answer as $clueObject){
+// 				foreach($subarray as $clueObject){
 // 					$stats[] = $clueObject->getStats();
-// 				}
 // 			}
 // 		}
-
-		foreach($allClues as $subarray){
-				foreach($subarray as $clueObject){
-					$stats[] = $clueObject->getStats();
-			}
-		}
 		
-		$final = array();
+// 		$final = array();
 		
-		array_walk_recursive($stats, function($item, $key) use (&$final){$final[$key] = isset($final[$key])?$item + $final[$key] : $item;});
+// 		array_walk_recursive($stats, function($item, $key) use (&$final){$final[$key] = isset($final[$key])?$item + $final[$key] : $item;});
 		
-		return $final;
-	}
+// 		return $final;
+// 	}
 	
 	public function Arrest($isCulprit) {
 		if ($isCulprit) {

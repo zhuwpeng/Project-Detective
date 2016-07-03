@@ -6,7 +6,7 @@ if(isset($_POST['confirm']) && $_POST['confirm']=="Confirm"){
 	$game = new Game();
 	
 	$_SESSION['detective'] = new Detective($_POST['name'], 10, 10, 10, $_POST['gender'], $_POST['age']);
-	$_SESSION['time'] = $_SESSION['detective']->getTime();
+	$_SESSION['time'] = $game->getTime();
 	$_SESSION['suspects'] = $game->getSuspects();
 	$_SESSION['locations'] = $game->getLocations();
 	$_SESSION['questions'] = $game->getQuestions();
